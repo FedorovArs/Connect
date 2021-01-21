@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="linePattern" value="%-5p [%d{dd MMM yyyy HH:mm:ss}] %c{0} - %m%n"/>
+    <property name="commonLogFilePrefix" value="./logs/connect"/>
+    <property name="errorsLogFilePrefix" value="${commonLogFilePrefix}-errors"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${linePattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="common" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${commonLogFilePrefix}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${commonLogFilePrefix}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+
+            <maxHistory>2</maxHistory>
+            <totalSizeCap>50MB</totalSizeCap>
+            <maxFileSize>20MB</maxFileSize>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <Pattern>${linePattern}</Pattern>
+        </encoder>
+
+        <filter class="otus.backend.config.LevelLessLogbackFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
+
+    <appender name="errors" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${errorsLogFilePrefix}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${errorsLogFilePrefix}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+
+            <maxHistory>2</maxHistory>
+            <totalSizeCap>50MB</totalSizeCap>
+            <maxFileSize>20MB</maxFileSize>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <Pattern>${linePattern}</Pattern>
+        </encoder>
+
+        <filter class="otus.backend.config.LevelGreaterLogbackFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="common"/>
+        <appender-ref ref="errors"/>
+    </root>
+</configuration>
