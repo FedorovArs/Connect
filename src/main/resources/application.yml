@@ -4,3 +4,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/connect
     username: postgres
     password: postgres
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 504338490835-rcobmg5uhlputl3ui794mt4lk1beb268.apps.googleusercontent.com
+            client-secret: ${clientSecretKey}
