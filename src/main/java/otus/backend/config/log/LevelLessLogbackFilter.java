@@ -1,11 +1,11 @@
-package otus.backend.config;
+package otus.backend.config.log;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
 
-public class LevelGreaterLogbackFilter extends Filter<ILoggingEvent> {
+public class LevelLessLogbackFilter extends Filter<ILoggingEvent> {
 
     private Level level;
 
@@ -15,7 +15,7 @@ public class LevelGreaterLogbackFilter extends Filter<ILoggingEvent> {
             return FilterReply.NEUTRAL;
         }
 
-        if (event.getLevel().toInt() >= level.toInt()) {
+        if (event.getLevel().toInt() <= level.toInt()) {
             return FilterReply.NEUTRAL;
         } else {
             return FilterReply.DENY;
@@ -33,4 +33,3 @@ public class LevelGreaterLogbackFilter extends Filter<ILoggingEvent> {
     }
 
 }
-

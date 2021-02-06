@@ -28,7 +28,7 @@
             <Pattern>${linePattern}</Pattern>
         </encoder>
 
-        <filter class="otus.backend.config.LevelLessLogbackFilter">
+        <filter class="otus.backend.config.log.LevelLessLogbackFilter">
             <level>WARN</level>
         </filter>
     </appender>
@@ -50,7 +50,7 @@
             <Pattern>${linePattern}</Pattern>
         </encoder>
 
-        <filter class="otus.backend.config.LevelGreaterLogbackFilter">
+        <filter class="otus.backend.config.log.LevelGreaterLogbackFilter">
             <level>ERROR</level>
         </filter>
     </appender>
