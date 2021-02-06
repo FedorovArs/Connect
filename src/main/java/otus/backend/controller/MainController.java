@@ -1,6 +1,7 @@
 package otus.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class MainController {
 
+    @Value("${spring.profiles.active}")
+    private String profile;
+
     private final MessageRepository messageRepo;
     private final UserService userService;
 
@@ -27,6 +31,7 @@ public class MainController {
         data.put("messages", messageRepo.findAll());
 
         model.addAttribute("frontendData", data);
+        model.addAttribute("isDevMode", "dev".equals(profile));
 
         return "index";
     }
