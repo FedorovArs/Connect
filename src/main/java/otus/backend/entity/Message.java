@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Message {
 
     @Id
@@ -30,5 +29,9 @@ public class Message {
     public Message(String text) {
         this.text = text;
         this.creationDate = LocalDateTime.now();
+    }
+
+    public Message() {
+        this.setCreationDate(LocalDateTime.now());
     }
 }

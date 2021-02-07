@@ -1,21 +1,19 @@
 package otus.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import otus.backend.entity.Message;
-import otus.backend.exception.NotFoundException;
 import otus.backend.model.message.MessageIn;
-import otus.backend.repository.MessageRepository;
 import otus.backend.service.MessageService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
 public class MessageController {
-
 
     private final MessageService messageService;
 
@@ -36,13 +34,19 @@ public class MessageController {
     }
 
     @PutMapping("message/{id}")
-    public Message updateById(@PathVariable Long id, @RequestBody MessageIn messageIn) {
-        return messageService.updateById(id, messageIn.getText());
+    public Message updateById(@PathVariable Long id, @RequestBody MessageIn message) {
+        return messageService.updateById(id, message.getText());
     }
 
     @DeleteMapping("message/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void delete(@PathVariable("id") Long id) {
         messageService.deleteById(id);
+    }
+
+    @MessageMapping("/changeMessage")
+    @SendTo("/topic/activity")
+    public Message message(Message message) {
+        return messageService.save(message);
     }
 }
 

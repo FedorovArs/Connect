@@ -14,4 +14,6 @@ public interface MessageService {
     Message updateById(Long id, String text);
 
     void deleteById(Long id);
+
+    Message save(Message message);
 }

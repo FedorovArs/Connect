@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import otus.backend.entity.User;
 import otus.backend.repository.MessageRepository;
 import otus.backend.service.UserService;
 
@@ -27,8 +28,11 @@ public class MainController {
     public String main(Model model, Principal principal) {
         HashMap<Object, Object> data = new HashMap<>();
 
-        data.put("profile", userService.getUserById(principal));
-        data.put("messages", messageRepo.findAll());
+        User user = userService.getUserById(principal);
+        if (user != null) {
+            data.put("profile", user);
+            data.put("messages", messageRepo.findAll());
+        }
 
         model.addAttribute("frontendData", data);
         model.addAttribute("isDevMode", "dev".equals(profile));
