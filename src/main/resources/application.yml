@@ -7,8 +7,6 @@ spring:
 
   security:
     oauth2:
-      resource:
-        filter-order: 3
       client:
         registration:
           google:

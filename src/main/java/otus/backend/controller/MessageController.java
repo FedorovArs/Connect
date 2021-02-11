@@ -5,9 +5,12 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import otus.backend.entity.Message;
+import otus.backend.entity.User;
 import otus.backend.model.message.MessageIn;
 import otus.backend.service.MessageService;
+import otus.backend.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -16,6 +19,7 @@ import java.util.List;
 public class MessageController {
 
     private final MessageService messageService;
+    private final UserService userService;
 
     @GetMapping("message")
     public List<Message> list() {
@@ -29,8 +33,9 @@ public class MessageController {
 
 
     @PostMapping("message")
-    public Message addMessage(@RequestBody MessageIn message) {
-        return messageService.addNewMessage(message.getText());
+    public Message addMessage(@RequestBody MessageIn message, Principal principal) {
+        User user = userService.getUserById(principal);
+        return messageService.addNewMessage(message.getText(), user);
     }
 
     @PutMapping("message/{id}")
@@ -45,7 +50,9 @@ public class MessageController {
 
     @MessageMapping("/changeMessage")
     @SendTo("/topic/activity")
-    public Message message(Message message) {
+    public Message message(Message message, Principal principal) {
+        User user = userService.getUserById(principal);
+        message.setUser(user);
         return messageService.save(message);
     }
 }

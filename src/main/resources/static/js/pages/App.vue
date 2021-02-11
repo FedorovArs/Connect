@@ -27,11 +27,23 @@ export default {
   },
   created() {
     addHandler(data => {
-      let index = getIndex(this.messages, data.id)
-      if (index > -1) {
-        this.messages.splice(index, 1, data)
+      if (!data.messageId) {
+        let index = getIndex(this.messages, data.id)
+        if (index > -1) {
+          this.messages.splice(index, 1, data)
+        } else {
+          this.messages.push(data)
+        }
       } else {
-        this.messages.push(data)
+        let messageId = this.messages.findIndex((message) => message.id === data.messageId)
+        let message = this.messages[messageId];
+
+        if (message.comments) {
+
+          message.comments.push(data);
+        } else {
+          message.comments = [data];
+        }
       }
     })
   }

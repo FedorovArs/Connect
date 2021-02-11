@@ -3,6 +3,7 @@ package otus.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import otus.backend.entity.Message;
+import otus.backend.entity.User;
 import otus.backend.exception.NotFoundException;
 import otus.backend.repository.MessageRepository;
 
@@ -26,8 +27,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message addNewMessage(String text) {
-        return messageRepository.save(new Message(text));
+    public Message addNewMessage(String text, User user) {
+        return messageRepository.save(new Message(text, user));
     }
 
     @Override

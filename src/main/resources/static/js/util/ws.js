@@ -31,3 +31,7 @@ export function disconnect() {
 export function sendMessage(message) {
     stompClient.send("/app/changeMessage", {}, JSON.stringify(message))
 }
+
+export function sendComment(comment) {
+    stompClient.send("/app/changeComment", {}, JSON.stringify(comment))
+}
