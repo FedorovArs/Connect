@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <i>({{ message.id }})</i> {{ message.text }}
+  <div style="margin-top: 15px">
+    <i>(MsgId: №{{ message.id }})</i>
+    text: {{ message.text }}
+    Author: {{ message.user.name }}
     <span style="position: absolute; right: 0">
             <input type="button" value="Edit" @click="edit"/>
             <input type="button" value="X" @click="del"/>

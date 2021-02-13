@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import otus.backend.entity.User;
 import otus.backend.repository.MessageRepository;
+import otus.backend.service.MessageService;
 import otus.backend.service.UserService;
 
 import java.security.Principal;
@@ -21,8 +22,9 @@ public class MainController {
     @Value("${spring.profiles.active}")
     private String profile;
 
-    private final MessageRepository messageRepo;
+    //    private final MessageRepository messageRepo;
     private final UserService userService;
+    private final MessageService messageService;
 
     @GetMapping
     public String main(Model model, Principal principal) {
@@ -31,7 +33,7 @@ public class MainController {
         User user = userService.getUserById(principal);
         if (user != null) {
             data.put("profile", user);
-            data.put("messages", messageRepo.findAll());
+            data.put("messages", messageService.getUserMessagesAndSubscriptions(user));
         }
 
         model.addAttribute("frontendData", data);

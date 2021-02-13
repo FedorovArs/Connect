@@ -1,8 +1,6 @@
 package otus.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -11,7 +9,6 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -57,13 +54,5 @@ public class Message {
 
     public Message() {
         this.creationDate = LocalDateTime.now();
-    }
-
-    public List<Comment> getComments() {
-        // Из БД надо вернуть в другой последовательности
-        if (this.comments != null) {
-            Collections.reverse(comments);
-        }
-        return comments;
     }
 }

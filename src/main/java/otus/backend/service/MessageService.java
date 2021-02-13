@@ -17,4 +17,6 @@ public interface MessageService {
     void deleteById(Long id);
 
     Message save(Message message);
+
+    List<Message> getUserMessagesAndSubscriptions(User user);
 }

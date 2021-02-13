@@ -8,6 +8,8 @@ import otus.backend.exception.NotFoundException;
 import otus.backend.repository.MessageRepository;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +50,13 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Message save(Message message) {
         return messageRepository.save(message);
+    }
+
+    @Override
+    public List<Message> getUserMessagesAndSubscriptions(User user) {
+        Set<String> ids = user.getSubscriptions().stream().map(User::getId)
+                .collect(Collectors.toSet());
+        ids.add(user.getId());
+        return messageRepository.findAllByUserId_In(ids);
     }
 }

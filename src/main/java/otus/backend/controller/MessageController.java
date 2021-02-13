@@ -1,6 +1,8 @@
 package otus.backend.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import otus.backend.service.UserService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -22,7 +25,7 @@ public class MessageController {
     private final UserService userService;
 
     @GetMapping("message")
-    public List<Message> list() {
+    public List<Message> list(Principal principal) {
         return messageService.findAll();
     }
 

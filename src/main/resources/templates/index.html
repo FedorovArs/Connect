@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Connect</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <script th:inline="javascript">
         var frontendData = [[${frontendData}]];
     </script>
 </head>
 <body>
-<h3>Connect</h3>
+<h3> Social Network 'Connect'</h3>
 <div id="app"></div>
 <script th:src="${isDevMode} ? 'http://localhost:8000/main.js' : '/js/main.js'"></script>
 </body>

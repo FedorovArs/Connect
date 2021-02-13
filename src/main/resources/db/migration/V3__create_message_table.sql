@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS message;
-
 CREATE TABLE message
 (
     id            BIGSERIAL,

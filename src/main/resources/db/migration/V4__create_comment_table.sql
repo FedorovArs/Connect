@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS comment;
-
 CREATE TABLE comment
 (
     id         BIGSERIAL,

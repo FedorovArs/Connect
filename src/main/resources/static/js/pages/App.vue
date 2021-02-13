@@ -28,11 +28,14 @@ export default {
   created() {
     addHandler(data => {
       if (!data.messageId) {
-        let index = getIndex(this.messages, data.id)
-        if (index > -1) {
-          this.messages.splice(index, 1, data)
-        } else {
-          this.messages.push(data)
+        console.log(this.profile.subscriptions.some((user) => user.id === data.user.id))
+        if (this.profile.id === data.user.id || this.profile.subscriptions.some((user) => user.id === data.user.id)) {
+          let index = getIndex(this.messages, data.id)
+          if (index > -1) {
+            this.messages.splice(index, 1, data)
+          } else {
+            this.messages.push(data)
+          }
         }
       } else {
         let messageId = this.messages.findIndex((message) => message.id === data.messageId)

@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS user_subscriptions;
 DROP TABLE IF EXISTS usr;
 
 CREATE TABLE usr
