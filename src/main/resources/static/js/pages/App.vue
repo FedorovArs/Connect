@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <div>{{ profile.name }}&nbsp;<a href="/logout">Выйти</a></div>
-      <messages-list :messages="messages"/>
+      <messages-list :messages="messages" :profile="profile"/>
     </div>
   </div>
 </template>
@@ -28,7 +28,6 @@ export default {
   created() {
     addHandler(data => {
       if (!data.messageId) {
-        console.log(this.profile.subscriptions.some((user) => user.id === data.user.id))
         if (this.profile.id === data.user.id || this.profile.subscriptions.some((user) => user.id === data.user.id)) {
           let index = getIndex(this.messages, data.id)
           if (index > -1) {

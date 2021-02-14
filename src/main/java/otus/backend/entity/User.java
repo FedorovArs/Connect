@@ -2,12 +2,14 @@ package otus.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import otus.backend.model.Views;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,8 +25,10 @@ import java.util.Set;
 public class User implements Serializable {
     @Id
     @Column(name = "id")
+    @JsonView(Views.IdName.class)
     private String id;
 
+    @JsonView(Views.IdName.class)
     @Column(name = "name")
     private String name;
 

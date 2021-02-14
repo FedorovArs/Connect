@@ -3,7 +3,7 @@
     <i>(MsgId: №{{ message.id }})</i>
     text: {{ message.text }}
     Author: {{ message.user.name }}
-    <span style="position: absolute; right: 0">
+    <span style="float: right; margin-right: 20px">
             <input type="button" value="Edit" @click="edit"/>
             <input type="button" value="X" @click="del"/>
         </span>
