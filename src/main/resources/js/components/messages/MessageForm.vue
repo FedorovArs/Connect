@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {sendMessage} from 'util/ws'
+import {sendMessage} from '../../util/ws'
 
 export default {
   props: ['messages', 'messageAttr'],

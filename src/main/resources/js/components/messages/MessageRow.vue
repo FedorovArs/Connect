@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {sendComment} from 'util/ws'
+import {sendComment} from '../../util/ws'
 
 export default {
   props: ['message', 'editMessage', 'deleteMessage', 'messages'],

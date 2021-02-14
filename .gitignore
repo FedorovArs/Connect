@@ -32,3 +32,6 @@ yarn-error.log*
 *.sw?
 *.iml
 *.log
+
+node_modules
+/src/main/resources/static/js/

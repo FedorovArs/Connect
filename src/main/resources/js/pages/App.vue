@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import MessagesList from 'components/messages/MessageList.vue'
-import {addHandler} from 'util/ws'
-import {getIndex} from 'util/collections'
+import MessagesList from '../components/messages/MessageList.vue'
+import {addHandler} from '../util/ws'
+import {getIndex} from '../util/collections'
 
 export default {
   components: {
