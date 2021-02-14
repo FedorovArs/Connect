@@ -40,10 +40,11 @@ export default {
   },
   methods: {
     subscribe(userId) {
-      this.$resource('/profile/' + userId).save({user: {...this.profile}}).then(response => {
-        this.users = response.data.filter((user) => user.id !== this.profile.id);
-      })
-
+      this.$resource('/profile/' + userId)
+          .save({user: {...this.profile}})
+          .then(response => {
+            this.$emit('update:profile', response.data)
+          })
     },
     editMessage(message) {
       this.message = message

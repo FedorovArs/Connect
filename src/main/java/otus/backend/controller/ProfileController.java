@@ -2,12 +2,16 @@ package otus.backend.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import otus.backend.entity.User;
 import otus.backend.model.Views;
 import otus.backend.service.ProfileService;
+import otus.backend.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -15,6 +19,7 @@ import java.util.List;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final UserService userService;
 
     @GetMapping("/user/all")
     @JsonView(Views.IdName.class)
@@ -29,13 +34,13 @@ public class ProfileController {
 
     @PostMapping("/profile/{channelId}")
     public User changeSubscription(
-            @AuthenticationPrincipal User subscriber,
-            @PathVariable("channelId") User channel
+            Principal principal,
+            @PathVariable("channelId") User user
     ) {
-        if (subscriber.equals(channel)) {
-            return channel;
-        } else {
-            return profileService.changeSubscription(channel, subscriber);
+        User subscriber = userService.getUserById(principal);
+        if (!subscriber.equals(user)) {
+            return profileService.changeSubscription(user, subscriber);
         }
+        return user;
     }
 }

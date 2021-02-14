@@ -12,20 +12,20 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class ProfileServiceImpl implements ProfileService{
+public class ProfileServiceImpl implements ProfileService {
 
     private final UserRepository userRepository;
 
     public User changeSubscription(User channel, User subscriber) {
-        Set<User> subscribers = channel.getSubscribers();
+        Set<User> subscriptions = subscriber.getSubscriptions();
 
-        if (subscribers.contains(subscriber)) {
-            subscribers.remove(subscriber);
+        if (subscriptions.contains(channel)) {
+            subscriptions.remove(channel);
         } else {
-            subscribers.add(subscriber);
+            subscriptions.add(channel);
         }
 
-        return userRepository.save(channel);
+        return userRepository.save(subscriber);
     }
 
     public User getUserById(String userId) {

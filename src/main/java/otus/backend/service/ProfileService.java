@@ -9,5 +9,5 @@ public interface ProfileService {
 
     User getUserById(String userId);
 
-    User changeSubscription(User channel, User subscriber);
+    User changeSubscription(User user, User subscriber);
 }

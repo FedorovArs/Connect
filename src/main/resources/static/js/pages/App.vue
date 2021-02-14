@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <div>{{ profile.name }}&nbsp;<a href="/logout">Выйти</a></div>
-      <messages-list :messages="messages" :profile="profile"/>
+      <messages-list :messages="messages" :profile="profile" v-on:update:profile="profile = $event"/>
     </div>
   </div>
 </template>

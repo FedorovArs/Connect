@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/").permitAll()
                 .and()
+                .csrf().disable()
                 .oauth2Login();
     }
 
